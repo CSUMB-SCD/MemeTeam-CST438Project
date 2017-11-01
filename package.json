@@ -6,6 +6,9 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async": "^2.5.0",
+    "btoa": "^1.1.2",
+    "chai": "^4.1.2",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -13,7 +16,5 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "serve-favicon": "~2.4.5",
-    "yarm": "^0.4.0",
-    "yarn": "^1.2.1"
   }
 }
