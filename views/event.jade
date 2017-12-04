@@ -70,20 +70,31 @@ html
                       a(href='#') Log Out
           .page-header
     block content
-        h1 HELLO WORLD
-        #info
-           form(method='post')
+        h1#title Create Event
+        div#info
+           form#myForm(method="post")
              br
-             | Title:
+             |     Title:
              br
-             input#title(type='text')
+             input(type='text',id="name" required='')
              br
              |     Description:
-             input#description(type='text')
+             br
+             input(type='text',id="description" required='')
              br
              |     Location:
-             input#location(type='text')
              br
-             input#submit(type="submit", value = "submit")
+             input(type='text',id="location" required='')
+             br
+             |      Date and Time"
+             br
+             input(type="datetime-local", id="date" required='')
+             br
+             button(type='button', onclick='getInfo()') Submit
+        div#afterSubmit
+          br
+          h3#title After Hitting Submit, Add to Calendar!
+  script(src='/javascripts/createEvent.js')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   script(type='text/javascript', src='https://addevent.com/libs/atc/1.6.1/atc.min.js', async='', defer='')
 

@@ -7019,6 +7019,11 @@ a.list-group-item-danger.active:focus {
   border: none;
 }
 #info{
-  display:inline-block;
+  text-align: center;
+}
+#title,#submit{
+  text-align: center;
+}
+#afterSubmit{
   text-align: center;
 }
