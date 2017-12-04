@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session')
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -42,6 +43,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 }}));
+app.get('/', function(req, res, next) {
+  req.session.someAttribute = "foo";
 });
 
 module.exports = app;
