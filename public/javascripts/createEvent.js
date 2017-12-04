@@ -5,10 +5,9 @@ function getInfo(){
     var location = document.getElementById('location').value;
     var dateTime = document.getElementById('date').value;
     
-    
-    
-    console.log(title);
-    console.log(description);
-    console.log(location);
-    console.log(dateTime);
+    //change the span from the calendar button to the new values:
+    $('.start').html(dateTime);
+    $('.title').html(title);
+    $('.description').html(description);
+    $('.location').html(location);
 }
