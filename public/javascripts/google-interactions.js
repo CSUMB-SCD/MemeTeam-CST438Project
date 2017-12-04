@@ -48,6 +48,9 @@ function onSignIn(googleUser) {
     }
   });
   
+  
+  updateUserOnFirebase(); 
+  
   $("#logoutButton").show();
   $("#signOnButton").hide();
 }
@@ -59,7 +62,7 @@ function isUserEqual(googleUser, firebaseUser) {
       if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
           providerData[i].uid === googleUser.getBasicProfile().getId()) {
         // We don't need to reauth the Firebase connection.
-        return true;x
+        return true;
       }
     }
   }
@@ -78,3 +81,27 @@ function signOut(){
 }
 
 
+function updateUserOnFirebase(){
+  var user = firebase.auth().currentUser;
+  db = getFirebaseConn();
+  var email = user.email;
+  var userId = user.uid;
+  var name = user.displayName;
+  
+  
+  var currentdate = new Date(); 
+  var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+
+  
+  var dbUser = db.ref().child('user').child(userId)
+  dbUser.child('email').set(email);
+  dbUser.child('userId').set(userId);
+  dbUser.child('name').set(name);
+  dbUser.child('last-login').set(datetime);
+   
+}
