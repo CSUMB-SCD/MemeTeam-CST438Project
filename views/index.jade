@@ -47,6 +47,7 @@ html
                   input.form-control(type='text')
                 button.btn.btn-default(type='submit')
                   | Submit
+              
               ul.nav.navbar-nav.navbar-right
                 li.dropdown
                   #signOnButton
@@ -177,21 +178,23 @@ html
     //Firebase login
     script(src='https://www.gstatic.com/firebasejs/4.7.0/firebase.js')
     script(src='https://apis.google.com/js/platform.js', async='', defer='')
-    meta(name='google-signin-client_id', content='502241240558-cev4ig5hj7350bmapo1bh7n8bih7mauc.apps.googleusercontent.com')
+    meta(name='google-signin-client_id', content='1074718974281-qver9kk103prmb48ms3s4i6lameajk0b.apps.googleusercontent.com')
     meta(name='google-signin-cookiepolicy', content='single_host_origin')
     meta(name='google-signin-scope', content='profile email')
     script.
       // Initialize Firebase
       var config = {
-      apiKey: "AIzaSyBv89xBwcS8AYJ5i9hK5xWLYxTXRc1QGOU",
+      apiKey: "AIzaSyAKIee16H8oZU4UlTbg75ArzcvocO1JscE",
       authDomain: "cst438-finalproject-smccarthy0426.c9users.io",
-      databaseURL: "https://watchit-7a6cb.firebaseio.com",
-      projectId: "watchit-7a6cb",
-      storageBucket: "",
-      messagingSenderId: "502241240558"
+      databaseURL: "https://watchit-61266.firebaseio.com",
+      projectId: "watchit-61266",
+      storageBucket: "watchit-61266.appspot.com",
+      messagingSenderId: "1074718974281"
       };
       firebase.initializeApp(config);
+    script(src='/javascripts/firebase-conn.js')
     script(src='/javascripts/google-interactions.js')
+    
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
 
 
