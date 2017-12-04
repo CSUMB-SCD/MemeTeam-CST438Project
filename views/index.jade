@@ -25,13 +25,15 @@ html
                   a(href='#') Messages
                 li
                   a(href='#') Profile
+                li
+                  a(href='event') Create Event
                 li.dropdown
                   a.dropdown-toggle(href='#', data-toggle='dropdown')
                     | Events
                     strong.caret
                   ul.dropdown-menu
                     li
-                      a(href='#') Action
+                      a(href='#') Create Event
                     li
                       a(href='#') Another action
                     li
@@ -53,8 +55,6 @@ html
                    .g-signin2(data-onsuccess='onSignIn', data-theme="dark")
                   #logoutButton(style = "display:none")
                     button(onclick = 'signOut()') Logout
-                    
-
                   ul.dropdown-menu
                     li
                       a(href='#') Settings
@@ -193,5 +193,6 @@ html
       firebase.initializeApp(config);
     script(src='/javascripts/google-interactions.js')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-
+    script(type='text/javascript', src='https://addevent.com/libs/atc/1.6.1/atc.min.js', async='', defer='')
+    script(src='/javascripts/createEvent.js')
 

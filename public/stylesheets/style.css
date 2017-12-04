@@ -7018,3 +7018,7 @@ a.list-group-item-danger.active:focus {
 .popover-title {
   border: none;
 }
+#info{
+  display:inline-block;
+  text-align: center;
+}

@@ -1,14 +1,11 @@
 {
-  "name": "workspace",
+  "name": "memeteam-cst438project",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "async": "^2.5.0",
-    "btoa": "^1.1.2",
-    "chai": "^4.1.2",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
