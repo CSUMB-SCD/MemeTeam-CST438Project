@@ -34,12 +34,13 @@ html
                 button.btn.btn-default(type='submit')
                   | Submit
               ul.nav.navbar-nav.navbar-right
-                li
-                  a(href='./chat') Live Chat
                 li.dropdown
-                  a.dropdown-toggle(href='#', data-toggle='dropdown')
-                    | Account
-                    strong.caret
+                  #signOnButton
+                   .g-signin2(data-onsuccess='onSignIn', data-theme="dark")
+                  #logoutButton(style = "display:none")
+                    button(onclick = 'signOut()') Logout
+                    
+
                   ul.dropdown-menu
                     li
                       a(href='#') Settings
@@ -156,4 +157,28 @@ html
                   #panel-element-89457.panel-collapse.collapse
                     .panel-body
                       | Popular Show Viewings
+          h3.text-info.text-right
+            | Sign up now!
+    
+    //Firebase login
+    script(src='https://www.gstatic.com/firebasejs/4.7.0/firebase.js')
+    script(src='https://apis.google.com/js/platform.js', async='', defer='')
+    meta(name='google-signin-client_id', content='502241240558-cev4ig5hj7350bmapo1bh7n8bih7mauc.apps.googleusercontent.com')
+    meta(name='google-signin-cookiepolicy', content='single_host_origin')
+    meta(name='google-signin-scope', content='profile email')
+    script.
+      // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyBv89xBwcS8AYJ5i9hK5xWLYxTXRc1QGOU",
+      authDomain: "cst438-finalproject-smccarthy0426.c9users.io",
+      databaseURL: "https://watchit-7a6cb.firebaseio.com",
+      projectId: "watchit-7a6cb",
+      storageBucket: "",
+      messagingSenderId: "502241240558"
+      };
+      firebase.initializeApp(config);
+    script(src='/javascripts/google-interactions.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+
+
 
