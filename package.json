@@ -21,6 +21,6 @@
   
   "test":{
   "override":
-    " yarn test"
+    "yarn": " yarn test"
   }
 }
