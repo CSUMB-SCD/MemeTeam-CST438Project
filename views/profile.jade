@@ -1,0 +1,117 @@
+doctype html
+html
+  head
+    link(href='/stylesheets/style.css', rel='stylesheet')
+    title Bob Joe Profile
+  body
+    script(src='jquery-3.2.1.min.js')
+    .container-fluid
+      .row
+        .col-md-12
+          nav.navbar.navbar-default(role='navigation')
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href='#') Brand
+            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+              ul.nav.navbar-nav
+                li
+                  a(href='/') Home
+                li
+                  a(href='#') Messages
+                li.active
+                  a(href='/profile') Profile
+                li
+                  a(href='#') Events
+              form.navbar-form.navbar-left(role='search')
+                .form-group
+                  input.form-control(type='text')
+                button.btn.btn-default(type='submit') Submit
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a(href='#') Link
+                li.dropdown
+                  a.dropdown-toggle(href='#', data-toggle='dropdown')
+                    | Dropdown
+                    strong.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='#') Action
+                    li
+                      a(href='#') Another action
+                    li
+                      a(href='#') Something else here
+                    li.divider
+                    li
+                      a(href='#') Separated link
+          .row
+            .col-md-4
+              img.img-circle(alt='Bootstrap Image Preview', src='http://lorempixel.com/140/140/')
+              h3 Bob Joe
+              p Hello! My name is Bob Joe! My dog's name is just Joe.
+            .col-md-8
+              #tabs-883022.tabbable
+                ul.nav.nav-tabs
+                  li.active
+                    a(href='#panel-685030', data-toggle='tab') Viewings
+                  li
+                    a(href='#panel-73873', data-toggle='tab') About
+                .tab-content
+                  #panel-685030.tab-pane.active
+                    p
+                  #panel-73873.tab-pane
+                    p
+              .media
+                a.pull-left(href='#')
+                  img.media-object(alt='Bootstrap Media Preview', src='http://lorempixel.com/64/61/')
+                .media-body
+                  h4.media-heading Game of Thrones Viewing
+                  |  Yo yo yo my peeps, this sunday only! view GoT @ mah crib.
+                  .media
+                    a.pull-left(href='#')
+                      img.media-object(alt='Bootstrap Media Another Preview', src='http://lorempixel.com/64/62/')
+                    .media-body
+                      h4.media-heading Yaaaaas
+                      |  No way! Your TV is awesome.
+              .media
+                a.pull-left(href='#')
+                  img.media-object(alt='Bootstrap Media Preview', src='http://lorempixel.com/64/61/')
+                .media-body
+                  h4.media-heading UFC fight tonight!
+                  |  Hosting a viewing of the fight tonight! Pot luck!
+                  .media
+                    a.pull-left(href='#')
+                      img.media-object(alt='Bootstrap Media Another Preview', src='http://lorempixel.com/64/63/')
+                    .media-body
+                      h4.media-heading YUM
+                      |  Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies.
+                  .media
+                    a.pull-left(href='#')
+                      img.media-object(alt='Bootstrap Media Another Preview', src='http://lorempixel.com/64/64/')
+                    .media-body
+                      h4.media-heading YUM
+                      |  Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies.
+                  .media
+                    a.pull-left(href='#')
+                      img.media-object(alt='Bootstrap Media Another Preview', src='http://lorempixel.com/64/65/')
+                    .media-body
+                      h4.media-heading YUM
+                      |  Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies.
+              ul.pagination
+                li
+                  a(href='#') Prev
+                li
+                  a(href='#') 1
+                li
+                  a(href='#') 2
+                li
+                  a(href='#') 3
+                li
+                  a(href='#') 4
+                li
+                  a(href='#') 5
+                li
+                  a(href='#') Next
