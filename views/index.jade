@@ -51,9 +51,10 @@ html
                 li
                   a(href='./chat') Live Chat
                 li.dropdown
-                  .g-signin2(data-bind='visible: !isSigned()', data-onsuccess='onSignIn')
+                  .g-signin2(data-bind='visible: !isSigned()', data-onsuccess='onSignIn', data-theme="dark")
                   #logoutButton()
                     button(onclick = 'signOut()') Logout
+                    button(onclick = 'googleTest()') Test
 
                   ul.dropdown-menu
                     li
@@ -178,6 +179,8 @@ html
     script(src='https://www.gstatic.com/firebasejs/4.7.0/firebase.js')
     script(src='https://apis.google.com/js/platform.js', async='', defer='')
     meta(name='google-signin-client_id', content='502241240558-cev4ig5hj7350bmapo1bh7n8bih7mauc.apps.googleusercontent.com')
+    meta(name='google-signin-cookiepolicy', content='single_host_origin')
+    meta(name='google-signin-scope', content='profile email')
     script.
       // Initialize Firebase
       var config = {
