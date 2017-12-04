@@ -24,7 +24,6 @@ function userLogin() {
 
 function onSignIn(googleUser) {
     console.log('Google Auth Response', googleUser);
-    googleTest();
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
     var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
     unsubscribe();
@@ -49,7 +48,8 @@ function onSignIn(googleUser) {
     }
   });
   
-  $("#logoutButton").toggle();
+  $("#logoutButton").show();
+  $("#signOnButton").hide();
 }
 
 function isUserEqual(googleUser, firebaseUser) {
@@ -72,18 +72,9 @@ function signOut(){
     auth2.signOut().then(function () {
       console.log('User signed out.');
     })
-    $("#logoutButton").toggle();
+    $("#logoutButton").hide();
+    $("#signOnButton").show();
 
 }
 
 
-function googleTest()
-{
-        var user = firebase.auth().currentUser;
-
-        if (user) {
-          console.log(user.displayName);
-        } else {
-          console.log("BAD");
-        }
-}
