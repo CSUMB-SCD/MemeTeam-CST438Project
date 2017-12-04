@@ -91,9 +91,8 @@ html
              input(type="datetime-local", id="date" required='')
              br
              button(type='button', onclick='getInfo()') Submit
-        div#afterSubmit
-          br
-          h3#title After Hitting Submit, Add to Calendar!
+        div#afterSubmit(hidden = '')
+              p Submitted. Now Click on Add to Calendar!
   script(src='/javascripts/createEvent.js')
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   script(type='text/javascript', src='https://addevent.com/libs/atc/1.6.1/atc.min.js', async='', defer='')

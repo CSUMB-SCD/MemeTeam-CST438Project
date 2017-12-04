@@ -1,5 +1,4 @@
 function getInfo(){
-    
     var title = document.getElementById('name').value;
     var description = document.getElementById('description').value;
     var location = document.getElementById('location').value;
@@ -10,4 +9,7 @@ function getInfo(){
     $('.title').html(title);
     $('.description').html(description);
     $('.location').html(location);
+    
+    //Show that the information was Completed By adding a Little Message:
+    $('#afterSubmit').show();
 }
