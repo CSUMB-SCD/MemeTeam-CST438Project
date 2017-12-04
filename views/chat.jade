@@ -13,6 +13,47 @@ html(lang='en')
     .container-fluid
       .row
         .col-md-12
+        nav.navbar.navbar-default(role='navigation')
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href='#') WatchIt
+            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+              ul.nav.navbar-nav
+                li.active
+                  a(href='#') Home
+                li
+                  a(href='/messages') Messages
+                li
+                  a(href='/profile') Profile
+                li
+                  a(href='/events') Events
+                
+              form.navbar-form.navbar-left(role='search')
+                .form-group
+                  input.form-control(type='text')
+                button.btn.btn-default(type='submit')
+                  | Submit
+              ul.nav.navbar-nav.navbar-right
+                li.dropdown
+                  #signOnButton
+                   .g-signin2(data-onsuccess='onSignIn', data-theme="dark")
+                  #logoutButton(style = "display:none")
+                    button(onclick = 'signOut()') Logout
+                    
+
+                  ul.dropdown-menu
+                    li
+                      a(href='#') Settings
+                    li
+                      a(href='#') Privacy
+                    li.divider
+                    li
+                      a(href='#') Log Out
+          .page-header
           h3
             | Messages
           .row
