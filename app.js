@@ -7,9 +7,12 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 
 var index = require('./routes/index');
+var profile = require('./routes/profile');
 var users = require('./routes/users');
 var event = require('./routes/event');
 
+var chat = require ('./routes/chat');
+var events = require('./routes/events');
 var app = express();
 
 // view engine setup
@@ -27,6 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/event', event);
+app.use('/messages', chat);
+app.use('/profile', profile);
+app.use('/events', events);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

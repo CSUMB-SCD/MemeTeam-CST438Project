@@ -1,0 +1,115 @@
+doctype html
+html(lang='en-us')
+  head
+    meta(charset='utf-8')
+    title WatchIt
+    // Bootstrap
+    link(href='/stylesheets/style.css', rel='stylesheet')
+  nav.navbar.navbar-default(role='navigation')
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href='#') WatchIt
+            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+              ul.nav.navbar-nav
+                li.active
+                  a(href='#') Home
+                li
+                  a(href='/messages') Messages
+                li
+                  a(href='/profile') Profile
+                li
+                  a(href='/events') Events
+                
+              form.navbar-form.navbar-left(role='search')
+                .form-group
+                  input.form-control(type='text')
+                button.btn.btn-default(type='submit')
+                  | Submit
+              ul.nav.navbar-nav.navbar-right
+                li.dropdown
+                  #signOnButton
+                   .g-signin2(data-onsuccess='onSignIn', data-theme="dark")
+                  #logoutButton(style = "display:none")
+                    button(onclick = 'signOut()') Logout
+                    
+
+                  ul.dropdown-menu
+                    li
+                      a(href='#') Settings
+                    li
+                      a(href='#') Privacy
+                    li.divider
+                    li
+                      a(href='#') Log Out
+  .container-fluid
+    .row
+      .col-md-6
+        .page-header
+          h1
+            | The Walking Dead
+            small  Season 8 , Episode 01
+        img(alt='Bootstrap Image Preview', src='http://www.dreadcentral.com/wp-content/uploads/2017/07/twd-season8-s.jpg')
+      .col-md-6
+        h2
+          | Description
+        p
+          | You'll be forgiven if you can't remember everything that happened at the end of Season Seven, which introduced a slew of new people before wrapping things up with a finale chock full of fresh corpses. Last year, Rick and the Alexandrians traveled far and wide, making some new alliances (and enemies). The key names and places to recall are:
+          | –The Hilltop, which Maggie and Paul (a.k.a. "Jesus") effectively took over from its cowardly leader Gregory – who, in retaliation, has been feeding intel to the Saviors. Not good, Greg.
+          | –The Kingdom, whose cautious, benevolent King Ezekiel gave the burned-out Carol and Morgan a place to rest and regroup. Initially determined to remain safely neutral, the man with the tiger has belatedly agreed to join Rick's cause, with his Alexandrian guests as his chief strategists/generals.
+        p
+          a.btn(href='#') View more details »
+        .page-header
+          h1
+            | Viewing Parties
+        table.table
+          thead
+            tr
+              th
+                | Host
+              th
+                | Date
+              th
+                | Attendees
+              th
+                | Location
+          tbody
+            tr
+              td
+                | Sean McCarthy
+              td
+                | 10/22/2017
+              td
+                | 15
+              td
+                | Salinas
+            tr
+              td
+                | Laura McRae
+              td
+                | 10/23/2017
+              td
+                | 2
+              td
+                | Seaside
+            tr
+              td
+                | Christian Martinez
+              td
+                | 10/25/2017
+              td
+                | 3
+              td
+                | Seaside
+            tr
+              td
+                | Adrian Martinez
+              td
+                | 10/22/2017
+              td
+                | 30
+              td
+                | Marina
