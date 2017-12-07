@@ -87,7 +87,6 @@ function getMovieDb() {
             returnvar1 = true;
             if(returnvar2 && returnvar1){
                 app.locals.database = database;
-                //console.log(app.locals.database);
             }
         });
 
@@ -124,12 +123,9 @@ function getMovieDb() {
         console.log("Error: " + err.message);
         returnvar2 = true;
     });
-    console.log(returnvar1, returnvar2);
-    
+
     
 }
 getMovieDb();
-
-console.log("App locals database: ", app.locals.movie_db);
 
 module.exports = app;
