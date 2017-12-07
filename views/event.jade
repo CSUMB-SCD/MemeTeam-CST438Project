@@ -17,29 +17,14 @@ html
               a.navbar-brand(href='#') WatchIt
             #bs-example-navbar-collapse-1.collapse.navbar-collapse
               ul.nav.navbar-nav
-                li.active
+               li.active
                   a(href='/') Home
                 li
                   a(href='/profile') Profile
                 li
                   a(href='/event') Create Event
-                li.dropdown
-                  a.dropdown-toggle(href='/events', data-toggle='dropdown')
-                    | Events
-                    strong.caret
-                  ul.dropdown-menu
-                    li
-                      a(href='#') Create Event
-                    li
-                      a(href='#') Another action
-                    li
-                      a(href='#') Something else here
-                    li.divider
-                    li
-                      a(href='#') Separated link
-                    li.divider
-                    li
-                      a(href='#') One more separated link
+                li
+                 a(href='/events') Events
               form.navbar-form.navbar-left(role='search')
                 .form-group
                   input.form-control(type='text')
