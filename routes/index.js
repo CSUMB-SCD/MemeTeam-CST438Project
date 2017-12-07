@@ -1,6 +1,6 @@
 
 var express = require('express');
-var app = express();
+// var app = express();
 var router = express.Router();
 //var database;
 // router.get('/', function(req, res) {
@@ -16,19 +16,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/profile', function(req, res) {
-  res.render('profile.jade', { title: 'Profile' });
-});
+// router.get('/profile', function(req, res) {
+//   res.render('profile.jade', { title: 'Profile' });
+// });
 
-router.get('/eventdashboard', function(req, res, next) {
-  var database = req.app.locals.database;
-  
-  res.render('eventdashboard.jade', { title: 'Events', corn: database });
-});
 
-router.get('/messages', function(req, res, next) {
-  res.render('chat.jade', { title: 'Chat' });
-});
+// router.get('/messages', function(req, res, next) {
+//   res.render('chat.jade', { title: 'Chat' });
+// });
 
 // router.get('/events'), function(req, res, next){
 //   var dat = req.params.data;

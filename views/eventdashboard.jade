@@ -82,7 +82,6 @@ html(lang='en-us')
                     p
                       | #{database[1].overview}
                 .item
-                  img(alt='Carousel Bootstrap Third', src='https://image.tmdb.org/t/p/w1000/#{database[2].backdrop}')
                   .carousel-caption
                     h4
                       | #{database[2].title}
@@ -105,7 +104,7 @@ html(lang='en-us')
                       | #{data.overview}
                     p
                       // a.btn.btn-primary(href='/events/'+ data.title, role='button') View Events & Info
-                      a.btn.btn-primary(href='/events/', role='button') View Events & Info
+                      a.btn.btn-primary(href='/events/'+data.title+data.backdrop+'/'+data.overview+data.poster_path, role='button') View Events & Info
               - itr++
               // script.
               //   //console.log(data)

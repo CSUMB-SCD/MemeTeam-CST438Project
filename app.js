@@ -5,15 +5,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var app = express();
+var http = require("http").Server(app)
 
-var eventdashboard = require('./routes/eventdashboard');
+
 var index = require('./routes/index');
 var profile = require('./routes/profile');
 var users = require('./routes/users');
 var chat = require('./routes/chat');
 var events = require('./routes/events');
+var eventdashboard = require('./routes/eventdashboard');
 
-var app = express();
+
 //app.locals.port = 3001;
 //const index = require('./routes/index');
 //app.use('*', index);
@@ -61,10 +64,11 @@ app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 } })
 app.get('/', function(req, res, next) {
     req.session.someAttribute = "foo";
 });
-// app.get('/events/:data', function(req, res) {
-//   res.send(req.params);
-//   res.render('events.jade')
-// });
+
+
+
+
+
 const API_KEY = '76390e37292e31aa4b2f0f32cb375f2c';
 var database = [];
 
@@ -137,6 +141,7 @@ function getMovieDb() {
             returnvar2 = true;
             if (returnvar2 && returnvar1) {
                 app.locals.database = database;
+                app.locals.fish = 'salmon'
                 //console.log(database);
             }
         });
