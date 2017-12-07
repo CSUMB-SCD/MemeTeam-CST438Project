@@ -17,14 +17,9 @@ router.get('/profile', function(req, res) {
 });
 
 router.get('/events', function(req, res, next) {
-  //var database = app.locals.database;
-  var weee = 'i hate this';
-  if(req.app.locals==undefined){
-    weee="dfsdf";
-  } else {
-    weee='not undefined';
-  }
-  res.render('events.jade', { title: 'Events', corn: weee });
+  var database = req.app.locals.database;
+  
+  res.render('events.jade', { title: 'Events', corn: database });
 });
 
 router.get('/messages', function(req, res, next) {
