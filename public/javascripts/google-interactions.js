@@ -307,3 +307,15 @@ function addEvent(){
     Date: eventDate
   });
 }
+
+function getAllEvents(){
+  var db = getFirebaseConn();
+  var ref = db.ref().child('events');
+    ref.once('value',function(snap) {
+        snap.forEach(function(item) {
+            $("#eventsList").append("<div class = 'event'><br><p>Name: " + item.val().Name + "<br>Description:" + 
+            item.val().Description + "<br>Location" + item.val().Location + "<br>Date" + item.val().Date);
+        })
+      
+    })
+}
