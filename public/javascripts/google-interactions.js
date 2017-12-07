@@ -289,7 +289,8 @@ function sendMessageOverFirebase(){
 
 function addEvent(){
   var db = getFirebaseConn();
-  
+    var user = firebase.auth().currentUser;
+
   var ref = db.ref().child('events');
   var newEventRef = ref.push();
   
@@ -298,14 +299,27 @@ function addEvent(){
   var eventLocation = $("#location").val();
   var eventDescription = $("#description").val();
   var eventDate = $("#date").val();
-  var userList = "";
   
-  newEventRef.set({
+  
+
+    
+  var userRef = db.ref().child('user').child(user.uid).child('events').child(newEventRef.key);
+  userRef.set({
     Name: eventName,
     Location: eventLocation,
     Description: eventDescription,
     Date: eventDate
+  })
+  
+  var userList = userRef;
+    newEventRef.set({
+    Name: eventName,
+    Location: eventLocation,
+    Description: eventDescription,
+    Date: eventDate,
+    UserList: userList
   });
+  
 }
 
 function getAllEvents(){
