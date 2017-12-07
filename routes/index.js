@@ -1,12 +1,6 @@
-
 var express = require('express');
-// var app = express();
 var router = express.Router();
-//var database;
-// router.get('/', function(req, res) {
-//     datareq.app.locals.port)
-//     res.send('Hello from index.js!')
-// })
+
 /* GET home page. */
 // app.get('/events/:data', function(req, res) {
 //   res.send(req.params);
@@ -20,6 +14,12 @@ router.get('/', function(req, res, next) {
 //   res.render('profile.jade', { title: 'Profile' });
 // });
 
+<<<<<<< HEAD
+=======
+router.get('/events', function(req, res, next) {
+  res.render('events.jade', { title: 'Events' });
+});
+>>>>>>> master
 
 // router.get('/messages', function(req, res, next) {
 //   res.render('chat.jade', { title: 'Chat' });
