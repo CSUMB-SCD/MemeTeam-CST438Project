@@ -4,24 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-<<<<<<< HEAD
-var passport = require('passport');
-=======
+
 var app = express();
 var http = require("http").Server(app)
-
->>>>>>> origin/lauram
 
 var index = require('./routes/index');
 var profile = require('./routes/profile');
 var users = require('./routes/users');
-<<<<<<< HEAD
-var event = require('./routes/event');
-
-var chat = require ('./routes/chat');
-=======
 var chat = require('./routes/chat');
->>>>>>> origin/lauram
+var event = require('./routes/event');
 var events = require('./routes/events');
 var eventdashboard = require('./routes/eventdashboard');
 
@@ -70,18 +61,7 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-<<<<<<< HEAD
-=======
-app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 } }));
-app.get('/', function(req, res, next) {
-    req.session.someAttribute = "foo";
-});
 
-
-
-
-
->>>>>>> origin/lauram
 const API_KEY = '76390e37292e31aa4b2f0f32cb375f2c';
 var database = [];
 
@@ -119,7 +99,6 @@ function getMovieDb() {
             returnvar1 = true;
             if (returnvar2 && returnvar1) {
                 app.locals.database = database;
-                //console.log(app.locals.database);
             }
         });
 
@@ -165,30 +144,12 @@ function getMovieDb() {
     });
     console.log(returnvar1, returnvar2);
 
-
 }
 getMovieDb();
-<<<<<<< HEAD
 
-console.log("App locals database: ", app.locals.movie_db);
-=======
-
-// function defer(method) {
-//     if (window.jQuery) {
-//         method();
-//     } else {
-//         setTimeout(function() { defer(method) }, 50);
-//     }
-// }
-
-// function setAppLocals(){
-//     app.locals.movie_db = database;
-// }
-// defer(setAppLocals);
->>>>>>> origin/lauram
 
 module.exports = app;
 
-http.listen(process.env.PORT, function() {
-  console.log(process.env.IP + ":" + process.env.PORT);
-});
+// http.listen(process.env.PORT, function() {
+//   console.log(process.env.IP + ":" + process.env.PORT);
+// });

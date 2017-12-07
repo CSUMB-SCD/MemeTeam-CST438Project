@@ -82,9 +82,10 @@ html(lang='en-us')
                     p
                       | #{database[1].overview}
                 .item
+                  img(alt='Carousel Bootstrap Second', src='https://image.tmdb.org/t/p/w500/#{database[2].backdrop}')
                   .carousel-caption
                     h4
-                      | #{database[2].title}
+                      | #{database[2].title} 
                     p
                       | #{database[2].overview}
               a.left.carousel-control(href='#carousel-856253', data-slide='prev')
