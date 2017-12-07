@@ -7237,3 +7237,11 @@ a.list-group-item-danger.active:focus {
 .targetUser{
   float:right;
 }
+
+#btnGetEvents{
+  text-align: center;
+}
+
+#tableEvents{
+  width:100%;height:100%;
+}

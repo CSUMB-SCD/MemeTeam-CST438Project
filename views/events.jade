@@ -4,7 +4,7 @@ html(lang='en-us')
     meta(charset='utf-8')
     title WatchIt
     // Bootstrap
-    link(href='/stylesheets/style.css', rel='stylesheet')
+    link(href='/stylesheets/main.css', rel='stylesheet')
   nav.navbar.navbar-default(role='navigation')
           .navbar-header
             button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
@@ -114,7 +114,8 @@ html(lang='en-us')
               td
                 | Marina
   body
-    button(onclick='getAllEvents()') Show All Events
+    div(id = "btnGetEvents")
+      button(onclick='getAllEvents()') Show All Events
     div(id = "eventsList")
       
 script(src='https://www.gstatic.com/firebasejs/4.7.0/firebase.js')
