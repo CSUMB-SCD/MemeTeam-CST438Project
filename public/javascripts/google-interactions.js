@@ -294,7 +294,7 @@ function addEvent(){
   var ref = db.ref().child('events');
   var newEventRef = ref.push();
   
-  
+  console.log("CHECKING EVENT REF KEY " + newEventRef.key)
   var eventName = $("#name").val();
   var eventLocation = $("#location").val();
   var eventDescription = $("#description").val();
@@ -343,7 +343,7 @@ function getEventsFromFirebase(){
   var ref = db.ref().child('user').child(user.uid).child('events');
   ref.once('value',function(snap) {
         snap.forEach(function(item) {
-            $("#userEvents").append("<div class = 'event' ><button class = 'remove-user' value = '" + item.val().eventId + "' onclick = 'deleteEvent(this)'>-</button> <div>"+item.val().Name +"</div>"+
+            $("#userEvents").append("<div class = 'event' ><button class = 'remove-user' value = '" + item.val().EventId + "' onclick = 'deleteEvent(this)'>-</button> <div>"+item.val().Name +"</div>"+
              item.val().Date + " @ " 
             + item.val().Location  +"</div>");
         
@@ -357,6 +357,7 @@ function getEventsFromFirebase(){
 function joinEvent(eventId){
   var db = getFirebaseConn();
   var eventRef = db.ref().child('events').child(eventId);
+  console.log('Eventid ' + eventId);
   console.log("EventREf:" + eventRef);
   //get event information:
   eventRef.once("value").then(function(snapshot){
@@ -372,17 +373,18 @@ function joinEvent(eventId){
     
      //update it with the user joining event:
     eventInfo["UserList"].push(user.uid);
-    console.log(eventInfo["UserList"]);
       
   //add it to user Events:
-  var userRef = db.ref().child('user').child(user.uid).child('events');
+  var userRef = db.ref().child('user').child(user.uid).child('events').child(eventId);
   
   userRef.set({
     Name: eventInfo["Name"],
     Location: eventInfo["Location"],
     Description: eventInfo["Description"],
     Date: eventInfo["Date"],
-    UserList: eventInfo["UserList"]
+    UserList: eventInfo["UserList"],
+    EventId : eventId
+    
   });
   
   
@@ -392,12 +394,14 @@ function joinEvent(eventId){
     Location: eventInfo["Location"],
     Description: eventInfo["Description"],
     Date: eventInfo["Date"],
-    UserList: eventInfo["UserList"]
+    UserList: eventInfo["UserList"],
+    EventId : eventId
   });
     
   });
   
-  console.log("SUCCESS!");
+  window.location = "/profile";
+
 }
 
 function deleteEvent(element){
