@@ -1,0 +1,192 @@
+doctype html
+html
+  head
+    link(href='/stylesheets/style.css', rel='stylesheet')
+    title WatchIt
+  body
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+  .container-fluid
+    .row
+      .col-md-12
+        nav.navbar.navbar-default(role='navigation')
+          .navbar-header
+            button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='#') WatchIt
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li
+                a(href='/') Home
+              li.active
+                a(href='/profile') Profile
+              li
+                a(href='/event') Create Event
+              li
+                a(href='/events') Events
+              
+            form.navbar-form.navbar-left(role='search')
+              .form-group
+                input.form-control(type='text')
+              button.btn.btn-default(type='submit')
+                | Submit
+            
+            ul.nav.navbar-nav.navbar-right
+              li.dropdown
+                #signOnButton
+                 .g-signin2(data-onsuccess='onSignIn', data-theme="dark")
+                #logoutButton(style = "display:none")
+                  button(onclick = 'signOut()') Logout
+                  
+
+                ul.dropdown-menu
+                  li
+                    a(href='#') Settings
+                  li
+                    a(href='#') Privacy
+                  li.divider
+                  li
+                    a(href='#') Log Out
+        .row
+          .col-md-2
+            img#profile-image.img-circle(alt='User Image')
+            h3#displayName
+          .col-md-8
+            #tabs-883022.tabbable
+              ul.nav.nav-tabs
+                li#tabs1.active(onclick="updateTabContent(this)", data-toggle='tab') 
+                  a Viewings
+                li#tabs2(onclick="updateTabContent(this)", data-toggle='tab') 
+                  a Messages
+                li#tabs3(onclick="updateTabContent(this)",data-toggle='tab') 
+                  a Friends
+              .tab-content 
+              #tabs-1.tabContent
+                .userEvents#userEvents
+                .event-modal#eventModal(style = "display:none")
+                  .event-modal-content
+                    .event-modal-header
+                      span.close(onclick = "closeEventModal()") ×
+                      h2 Event Details
+                    .event-modal-body
+                      textarea#eventBody.event(cols='30', rows='10',placeholder = 'Enter a event..')
+                      
+                      
+                            
+                      .event-modal-footer
+
+              #tabs-2.tabContent(style='display:none')
+                .searchBar
+                   button(title = "Message your Friends", onclick = "launchMessagingModal()") Send a Message!
+                br
+                .message-modal#messageModal(style = "display:none")
+                   .message-modal-content
+                      .message-modal-header
+                        span.close(onclick = "closeMessageModal()") ×
+                        h2 Message a Friend!
+                      .message-modal-body
+                        textarea#messageBody.message(cols='30', rows='10',placeholder = 'Enter a Message..')
+                        
+                        .receiver 
+                          p(style = "float:left") To:
+                          select.targetUser#receiverSelect
+                            
+                        button.send-message(onclick = 'sendMessageOverFirebase()') Send
+                      .message-modal-footer
+              #tabs-3.tabContent.friendDiv(style='display:none')
+               .searchBar
+                 input#userSearch.userSearch(type='text', placeholder='Search...', onChange="friendSearch()")
+                 button.add-user(title = "Add a Friend!", onclick = "launchAddUserModal()") +
+                br
+               .user-modal#userModal(style = "display:none")
+                 .user-modal-content
+                    .user-modal-header
+                      span.close(onclick = "closeUserModal()") ×
+                      h2 Add a Friend!
+                    .user-modal-body#userModalBody
+                      
+                    .user-modal-footer
+                      
+
+
+            //.media
+              a.pull-left(href='#')
+                //img.media-object(alt='Bootstrap Media Preview', src='http://lorempixel.com/64/61/')
+              .media-body
+                h4.media-heading Game of Thrones Viewing
+                |  Yo yo yo my peeps, this sunday only! view GoT @ mah crib.
+                .media
+                  a.pull-left(href='#')
+                    //img.media-object(alt='Bootstrap Media Another Preview', src='http://lorempixel.com/64/62/')
+                  .media-body
+                    h4.media-heading Yaaaaas
+                    |  No way! Your TV is awesome.
+            //.media
+              a.pull-left(href='#')
+                //img.media-object(alt='Bootstrap Media Preview', src='http://lorempixel.com/64/61/')
+              .media-body
+                h4.media-heading UFC fight tonight!
+                |  Hosting a viewing of the fight tonight! Pot luck!
+                .media
+                  a.pull-left(href='#')
+                    //img.media-object(alt='Bootstrap Media Another Preview', src='http://lorempixel.com/64/63/')
+                  .media-body
+                    h4.media-heading YUM
+                    |  Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies.
+                .media
+                  a.pull-left(href='#')
+                    //img.media-object(alt='Bootstrap Media Another Preview', src='http://lorempixel.com/64/64/')
+                  .media-body
+                    h4.media-heading YUM
+                    |  Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies.
+                .media
+                  a.pull-left(href='#')
+                    //img.media-object(alt='Bootstrap Media Another Preview', src='http://lorempixel.com/64/65/')
+                  .media-body
+                    h4.media-heading YUM
+                    |  Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies. Ima bring me some chicken tendies.
+            //ul.pagination
+              li
+                a(href='#') Prev
+              li
+                a(href='#') 1
+              li
+                a(href='#') 2
+              li
+                a(href='#') 3
+              li
+                a(href='#') 4
+              li
+                a(href='#') 5
+              li
+                a(href='#') Next
+  script(src='https://www.gstatic.com/firebasejs/4.7.0/firebase.js')
+  script(src='https://apis.google.com/js/platform.js', async='', defer='')
+  meta(name='google-signin-client_id', content='1074718974281-qver9kk103prmb48ms3s4i6lameajk0b.apps.googleusercontent.com')
+  meta(name='google-signin-cookiepolicy', content='single_host_origin')
+  meta(name='google-signin-scope', content='profile email')
+  script(src='/javascripts/user-profile.js')
+  script.
+    // Initialize Firebase and user profile
+    var config = {
+    apiKey: "AIzaSyAKIee16H8oZU4UlTbg75ArzcvocO1JscE",
+    authDomain: "watchit-csumb.herokuapp.com",
+    databaseURL: "https://watchit-61266.firebaseio.com",
+    projectId: "watchit-61266",
+    storageBucket: "watchit-61266.appspot.com",
+    messagingSenderId: "1074718974281"
+    };
+    firebase.initializeApp(config);
+    
+  script(src='/javascripts/firebase-conn.js')
+  script(src='/javascripts/google-interactions.js')
+  script.
+    jQuery(document).ready(function() {
+    setTimeout(function() {
+         loadUserProfile()
+          }, 2000);
+      });
+  
+  
