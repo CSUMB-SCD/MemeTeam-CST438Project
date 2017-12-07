@@ -24,6 +24,8 @@ html
                 li
                   a(href='/profile') Profile
                 li
+                  a(href='/event') Create Event
+                li
                   a(href='/events') Events
                 
               form.navbar-form.navbar-left(role='search')
@@ -38,8 +40,6 @@ html
                    .g-signin2(data-onsuccess='onSignIn', data-theme="dark")
                   #logoutButton(style = "display:none")
                     button(onclick = 'signOut()') Logout
-                    
-
                   ul.dropdown-menu
                     li
                       a(href='#') Settings
@@ -169,7 +169,7 @@ html
       // Initialize Firebase
       var config = {
       apiKey: "AIzaSyAKIee16H8oZU4UlTbg75ArzcvocO1JscE",
-      authDomain: "cst438-finalproject-smccarthy0426.c9users.io",
+      authDomain: "cst438-finalproject-chrisumartinez.c9users.io",
       databaseURL: "https://watchit-61266.firebaseio.com",
       projectId: "watchit-61266",
       storageBucket: "watchit-61266.appspot.com",
@@ -178,8 +178,7 @@ html
       firebase.initializeApp(config);
     script(src='/javascripts/firebase-conn.js')
     script(src='/javascripts/google-interactions.js')
-    
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-
+    script(type='text/javascript', src='https://addevent.com/libs/atc/1.6.1/atc.min.js', async='', defer='')
 
 
