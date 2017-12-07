@@ -1,23 +1,15 @@
 # MemeTeam-CST438Project
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+    __     __     ______     ______   ______     __  __     __     ______  
+/\ \  _ \ \   /\  __ \   /\__  _\ /\  ___\   /\ \_\ \   /\ \   /\__  _\ 
+\ \ \/ ".\ \  \ \  __ \  \/_/\ \/ \ \ \____  \ \  __ \  \ \ \  \/_/\ \/ 
+ \ \__/".~\_\  \ \_\ \_\    \ \_\  \ \_____\  \ \_\ \_\  \ \_\    \ \_\ 
+  \/_/   \/_/   \/_/\/_/     \/_/   \/_____/   \/_/\/_/   \/_/     \/_/ 
+                                                                        
 
 
-Welcome to your Node.js project on Cloud9 IDE!
+WatchIt is a Node.js app for scheduling viewing parties with your friends! 
 
-This chat example showcases how to use `socket.io` with a static `express` server.
+## User Requirements
+     Just a google account and your good to go!
 
-## Running the server
-
-1) Open `server.js` and start thgit e app by clicking on the "Run" button in the top menu.
-
-2) Alternatively you can launch the app from the Terminal:
-
-    $ node server.js
-
-Once the server is running, open the project in the shape of 'https://projectname-username.c9users.io/'. As you enter your name, watch the Users list (on the left) update. Once you press Enter or Send, the message is shared with all connected clients.
