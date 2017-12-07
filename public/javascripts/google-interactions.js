@@ -289,7 +289,8 @@ function sendMessageOverFirebase(){
 
 function addEvent(){
   var db = getFirebaseConn();
-  
+    var user = firebase.auth().currentUser;
+
   var ref = db.ref().child('events');
   var newEventRef = ref.push();
   
@@ -306,4 +307,12 @@ function addEvent(){
     Description: eventDescription,
     Date: eventDate
   });
+  
+  var userRef = db.ref().child('user').child(user.uid).child('events').child(newEventRef.key);
+  userRef.set({
+    Name: eventName,
+    Location: eventLocation,
+    Description: eventDescription,
+    Date: eventDate
+  })
 }
