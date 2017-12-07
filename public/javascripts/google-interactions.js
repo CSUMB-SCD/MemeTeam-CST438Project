@@ -88,7 +88,7 @@ function updateUserOnFirebase(){
   while(maxTries>0){
     try{
       var user = firebase.auth().currentUser;
-      db = getFirebaseConn();
+      var db = getFirebaseConn();
       var email = user.email;
       var userId = user.uid;
       var photoURL = user.photoURL;
@@ -285,4 +285,25 @@ function sendMessageOverFirebase(){
   
   
   console.log("Sending : '" + userMessage + "' to " + targetUser);
+}
+
+function addEvent(){
+  var db = getFirebaseConn();
+  
+  var ref = db.ref().child('events');
+  var newEventRef = ref.push();
+  
+  
+  var eventName = $("#name").val();
+  var eventLocation = $("#location").val();
+  var eventDescription = $("#description").val();
+  var eventDate = $("#date").val();
+  var userList = "";
+  
+  newEventRef.set({
+    Name: eventName,
+    Location: eventLocation,
+    Description: eventDescription,
+    Date: eventDate
+  });
 }
