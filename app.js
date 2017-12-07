@@ -4,17 +4,28 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+<<<<<<< HEAD
 var passport = require('passport');
+=======
+var app = express();
+var http = require("http").Server(app)
+
+>>>>>>> origin/lauram
 
 var index = require('./routes/index');
 var profile = require('./routes/profile');
 var users = require('./routes/users');
+<<<<<<< HEAD
 var event = require('./routes/event');
 
 var chat = require ('./routes/chat');
+=======
+var chat = require('./routes/chat');
+>>>>>>> origin/lauram
 var events = require('./routes/events');
+var eventdashboard = require('./routes/eventdashboard');
 
-var app = express();
+
 //app.locals.port = 3001;
 //const index = require('./routes/index');
 //app.use('*', index);
@@ -39,35 +50,49 @@ app.use('/event', event);
 app.use('/messages', chat);
 app.use('/profile', profile);
 app.use('/events', events);
+app.use('/eventdashboard', eventdashboard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
+<<<<<<< HEAD
+=======
+app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 } }));
+app.get('/', function(req, res, next) {
+    req.session.someAttribute = "foo";
+});
+
+
+
+
+
+>>>>>>> origin/lauram
 const API_KEY = '76390e37292e31aa4b2f0f32cb375f2c';
 var database = [];
 
 var returnvar1 = false;
 var returnvar2 = false;
+
 function getMovieDb() {
     const https = require('https');
     var index = 0;
-    https.get('https://api.themoviedb.org/3/movie/popular?api_key=' + API_KEY +'&language=en-US&page=1', (resp) => {
-        
+    https.get('https://api.themoviedb.org/3/movie/popular?api_key=' + API_KEY + '&language=en-US&page=1', (resp) => {
+
         let data = '';
         resp.on('data', (chunk) => {
             data += chunk;
@@ -75,17 +100,24 @@ function getMovieDb() {
 
         resp.on('end', () => {
             var object = JSON.parse(data);
-            
+
             for (result in object.results) {
-                database[index] = {
-                    title : object.results[result].title,
-                    poster_path : object.results[result].poster_path,
-                    overview : object.results[result].overview
-                };
-                index += 1;
+                //console.log(typeof(object.results[result].backdrop_path));
+                //console.log(!(object.results[result].backdrop_path == null));
+                if (!(object.results[result].poster_path == null) && !(object.results[result].backdrop_path == null)
+                    && !(object.results[result].title == null)
+                    && !(object.results[result].overview == null)) {
+                    database[index] = {
+                        title: object.results[result].title,
+                        poster_path: object.results[result].poster_path,
+                        backdrop: object.results[result].backdrop_path,
+                        overview: object.results[result].overview
+                    };
+                    index += 1;
+                }
             }
             returnvar1 = true;
-            if(returnvar2 && returnvar1){
+            if (returnvar2 && returnvar1) {
                 app.locals.database = database;
                 //console.log(app.locals.database);
             }
@@ -95,9 +127,9 @@ function getMovieDb() {
         console.log("Error: " + err.message);
         returnvar1 = true;
     });
-    
-    https.get('https://api.themoviedb.org/3/tv/popular?api_key=' + API_KEY +'&language=en-US&page=1', (resp) => {
-        
+
+    https.get('https://api.themoviedb.org/3/tv/popular?api_key=' + API_KEY + '&language=en-US&page=1', (resp) => {
+
         let data = '';
         resp.on('data', (chunk) => {
             data += chunk;
@@ -105,31 +137,58 @@ function getMovieDb() {
 
         resp.on('end', () => {
             var object = JSON.parse(data);
+
             for (result in object.results) {
-                database[index] = {
-                    title : object.results[result].name,
-                    poster_path : object.results[result].poster_path,
-                    overview : object.results[result].overview
-                };
-                index += 1;
+                //console.log(typeof(object.results[result].backdrop_path));
+                //console.log(!(object.results[result].backdrop_path == null));
+                if (!(object.results[result].poster_path == null) && !(object.results[result].backdrop_path == null)) {
+                    database[index] = {
+                        title: object.results[result].name,
+                        poster_path: object.results[result].poster_path,
+                        backdrop: object.results[result].backdrop_path,
+                        overview: object.results[result].overview
+                    };
+                    index += 1;
+                }
             }
             returnvar2 = true;
-            if(returnvar2 && returnvar1){
+            if (returnvar2 && returnvar1) {
                 app.locals.database = database;
+                app.locals.fish = 'salmon'
                 //console.log(database);
             }
         });
-        
+
     }).on("error", (err) => {
         console.log("Error: " + err.message);
         returnvar2 = true;
     });
     console.log(returnvar1, returnvar2);
-    
-    
+
+
 }
 getMovieDb();
+<<<<<<< HEAD
 
 console.log("App locals database: ", app.locals.movie_db);
+=======
+
+// function defer(method) {
+//     if (window.jQuery) {
+//         method();
+//     } else {
+//         setTimeout(function() { defer(method) }, 50);
+//     }
+// }
+
+// function setAppLocals(){
+//     app.locals.movie_db = database;
+// }
+// defer(setAppLocals);
+>>>>>>> origin/lauram
 
 module.exports = app;
+
+http.listen(process.env.PORT, function() {
+  console.log(process.env.IP + ":" + process.env.PORT);
+});
