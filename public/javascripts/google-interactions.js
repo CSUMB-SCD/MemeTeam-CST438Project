@@ -305,7 +305,9 @@ function addEvent(){
     Name: eventName,
     Location: eventLocation,
     Description: eventDescription,
-    Date: eventDate
+    Date: eventDate,
+    eventId: newEventRef.key
+
   });
   
   var userRef = db.ref().child('user').child(user.uid).child('events').child(newEventRef.key);
@@ -313,6 +315,38 @@ function addEvent(){
     Name: eventName,
     Location: eventLocation,
     Description: eventDescription,
-    Date: eventDate
+    Date: eventDate,
+    eventId: newEventRef.key
+    
   })
+}
+
+
+function getEventsFromFirebase(){
+  var db = getFirebaseConn();
+      var user = firebase.auth().currentUser;
+
+  var ref = db.ref().child('user').child(user.uid).child('events');
+  ref.once('value',function(snap) {
+        snap.forEach(function(item) {
+            $("#userEvents").append("<div class = 'event' ><button class = 'remove-user' value = '" + item.val().eventId + "' onclick = 'deleteEvent(this)'>-</button> <div>"+item.val().Name +"</div>"+
+             item.val().Date + " @ " 
+            + item.val().Location  +"</div>");
+        
+          
+          
+        })
+      
+    })
+}
+
+function deleteEvent(element){
+  var db = getFirebaseConn();
+  
+  var user = firebase.auth().currentUser;
+   
+  var ref = db.ref().child('user').child(user.uid).child('events').child(element.getAttribute('value')); 
+  ref.remove();
+  location.reload();
+
 }

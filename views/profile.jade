@@ -64,6 +64,19 @@ html
                   a Friends
               .tab-content 
               #tabs-1.tabContent
+                .userEvents#userEvents
+                .event-modal#eventModal(style = "display:none")
+                  .event-modal-content
+                    .event-modal-header
+                      span.close(onclick = "closeEventModal()") ×
+                      h2 Event Details
+                    .event-modal-body
+                      textarea#eventBody.event(cols='30', rows='10',placeholder = 'Enter a event..')
+                      
+                      
+                            
+                      .event-modal-footer
+
               #tabs-2.tabContent(style='display:none')
                 .searchBar
                    button(title = "Message your Friends", onclick = "launchMessagingModal()") Send a Message!
