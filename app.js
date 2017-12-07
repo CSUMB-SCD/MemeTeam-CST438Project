@@ -58,8 +58,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-<<<<<<< HEAD
-=======
+
 app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 }}));
 app.get('/', function(req, res, next) {
   req.session.someAttribute = "foo";
