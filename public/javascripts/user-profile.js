@@ -7,6 +7,7 @@ function loadUserProfile(){
     
     getUserMessagesFromFirebase();
     getFriendsFromFirebase();
+    getEventsFromFirebase();
     
 }
 
@@ -84,5 +85,21 @@ function closeMessageModal(){
         modal.style.display = "none";
     
     var modalBody = document.getElementById('messageModalBody').innerHTML = '';
+
+}
+
+
+
+function launchEventModal(){
+    var modal = document.getElementById('eventModal');
+    modal.style.display = "block";
+    //addFriendsFromFirebase();
+}
+
+function closeEventModal(){
+    var modal = document.getElementById('eventModal');
+        modal.style.display = "none";
+    
+    var modalBody = document.getElementById('eventModalBody').innerHTML = '';
 
 }
