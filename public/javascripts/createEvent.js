@@ -10,6 +10,11 @@ function getInfo(){
     $('.description').html(description);
     $('.location').html(location);
     
+    $('.start').text(dateTime);
+    $('.title').text(title);
+    $('.description').text(description);
+    $('.location').text(location);
+    
     //Show that the information was Completed By adding a Little Message:
     $('#afterSubmit').show();
 }
