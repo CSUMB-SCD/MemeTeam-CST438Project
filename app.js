@@ -58,12 +58,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 }}));
-app.get('/', function(req, res, next) {
-  req.session.someAttribute = "foo";
-});
-
 const API_KEY = '76390e37292e31aa4b2f0f32cb375f2c';
 var database = [];
 
