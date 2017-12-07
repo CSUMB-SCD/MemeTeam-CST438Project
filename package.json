@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "app": "^0.1.0",
     "async": "^2.5.0",
     "body-parser": "~1.18.2",
     "btoa": "^1.1.2",
@@ -13,8 +14,11 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "express-session": "^1.15.6",
+    "https": "^1.0.0",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
+    "moviedb": "^0.2.10",
     "serve-favicon": "~2.4.5"
   }
 }
