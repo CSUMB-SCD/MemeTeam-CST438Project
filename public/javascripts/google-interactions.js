@@ -299,13 +299,15 @@ function addEvent(){
   var eventLocation = $("#location").val();
   var eventDescription = $("#description").val();
   var eventDate = $("#date").val();
+  var eventUserList = "";
     
   var userRef = db.ref().child('user').child(user.uid).child('events').child(newEventRef.key);
   userRef.set({
     Name: eventName,
     Location: eventLocation,
     Description: eventDescription,
-    Date: eventDate
+    Date: eventDate,
+    UserList: eventUserList
   })
 
   var userId = db.ref().child('user').child(user.uid);
@@ -355,7 +357,6 @@ function joinEvent(eventId){
     
      //update it with the user joining event:
     eventInfo["UserList"].push(user.uid);
-    
       
   //add it to user Events:
   var userRef = db.ref().child('user').child(user.uid).child('events');
@@ -368,6 +369,15 @@ function joinEvent(eventId){
     UserList: eventInfo["UserList"]
   });
   
+  
+  //now update it to the events as well:
+  eventRef.set({
+    Name: eventInfo["Name"],
+    Location: eventInfo["Location"],
+    Description: eventInfo["Description"],
+    Date: eventInfo["Date"],
+    UserList: eventInfo["UserList"]
+  });
     
   });
 
