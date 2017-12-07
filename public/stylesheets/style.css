@@ -7317,3 +7317,6 @@ a.list-group-item-danger.active:focus {
   width: 450px;
   
 }
+#btnGetEvents{
+  text-align:center;
+}

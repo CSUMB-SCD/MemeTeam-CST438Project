@@ -327,10 +327,16 @@ function getAllEvents(){
   var ref = db.ref().child('events');
     ref.once('value',function(snap) {
       $('#eventsList').empty();
+      
+      //set up a table:
+      $("#eventsList").empty();
         snap.forEach(function(item) {
-            $("#eventsList").append("<div class = 'event'><br><p>Name: " + item.val().Name + "<br>Description: " + 
-            item.val().Description + "<br>Location: " + item.val().Location + "<br>Date: " + item.val().Date);
-            $("#eventsList").append("<br><button id = '" + item.val().eventId + "'onclick='joinEvent(id)'>Join Event</button>");
+          var html = "";
+          html += "<table id = 'tableEvents' class = 'table table-striped table table-inverse'> <thead><th align = 'center'>" + item.val().Name + "</th></thead><tbody>" + "<td>" + "Description: " + 
+            item.val().Description + "<br>Location: " + item.val().Location + "<br>Date: " + item.val().Date +
+            "</td><td align = 'right'> <button id = '" + item.val().eventId + "'onclick='joinEvent(id)'>Join Event</button>" + "</td></tr></tbody</table>";
+          //do 3 for column:
+            $("#eventsList").append(html);
         })
       
     })

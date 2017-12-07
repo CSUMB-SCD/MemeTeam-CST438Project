@@ -76,9 +76,11 @@ html(lang='en-us')
               th
                 | Location
           tbody
-    button(onclick='getAllEvents()') Show All Events
+  body
+    div(id = "btnGetEvents")
+      button(onclick='getAllEvents()') Show All Events
     div(id = "eventsList")
-      
+    
 script(src='https://www.gstatic.com/firebasejs/4.7.0/firebase.js')
 script(src='https://apis.google.com/js/platform.js', async='', defer='')
 meta(name='google-signin-client_id', content='1074718974281-qver9kk103prmb48ms3s4i6lameajk0b.apps.googleusercontent.com')
