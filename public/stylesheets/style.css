@@ -7019,6 +7019,7 @@ a.list-group-item-danger.active:focus {
   border: none;
 }
 
+<<<<<<< HEAD
 .friend{
   padding : 5px;
   width: 300px;
@@ -7302,3 +7303,20 @@ a.list-group-item-danger.active:focus {
   width: 450px;
   
 }
+=======
+.carousel-inner img {
+  margin: auto;
+  width: 100%;
+  height: inherit;
+
+}
+
+.carousel-caption{
+    top: 20%;
+}
+
+#carousel-856253{
+  height: 350px;
+  overflow: hidden;
+}
+>>>>>>> origin/lauram
