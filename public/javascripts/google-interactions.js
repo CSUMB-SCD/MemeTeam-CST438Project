@@ -299,13 +299,14 @@ function addEvent(){
   var eventLocation = $("#location").val();
   var eventDescription = $("#description").val();
   var eventDate = $("#date").val();
-  var userList = "";
+  var userList = user.uid;
   
   newEventRef.set({
     Name: eventName,
     Location: eventLocation,
     Description: eventDescription,
     Date: eventDate,
+    UserList: userList,
     eventId: newEventRef.key
 
   });
@@ -316,11 +317,24 @@ function addEvent(){
     Location: eventLocation,
     Description: eventDescription,
     Date: eventDate,
+    UserList: userList,
     eventId: newEventRef.key
     
   })
 }
-
+function getAllEvents(){
+  var db = getFirebaseConn();
+  var ref = db.ref().child('events');
+    ref.once('value',function(snap) {
+      $('#eventsList').empty();
+        snap.forEach(function(item) {
+            $("#eventsList").append("<div class = 'event'><br><p>Name: " + item.val().Name + "<br>Description:" + 
+            item.val().Description + "<br>Location" + item.val().Location + "<br>Date" + item.val().Date);
+            $("#eventsList").append("<br><button id = '" + item.val().eventId + "'onclick='joinEvent(id)'>Join Event</button>");
+        })
+      
+    })
+}
 
 function getEventsFromFirebase(){
   var db = getFirebaseConn();
@@ -338,6 +352,52 @@ function getEventsFromFirebase(){
         })
       
     })
+}
+
+function joinEvent(eventId){
+  var db = getFirebaseConn();
+  var eventRef = db.ref().child('events').child(eventId);
+  console.log("EventREf:" + eventRef);
+  //get event information:
+  eventRef.once("value").then(function(snapshot){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    var eventInfo = {};
+    eventInfo["UserList"] = new Array();
+    eventInfo["Date"] = snapshot.val().Date;
+    eventInfo["Location"] = snapshot.val().Location;
+    eventInfo["Name"] = snapshot.val().Name;
+    eventInfo["UserList"].push(snapshot.val().UserList);
+    eventInfo["Description"] = snapshot.val().Description;
+    
+     //update it with the user joining event:
+    eventInfo["UserList"].push(user.uid);
+    console.log(eventInfo["UserList"]);
+      
+  //add it to user Events:
+  var userRef = db.ref().child('user').child(user.uid).child('events');
+  
+  userRef.set({
+    Name: eventInfo["Name"],
+    Location: eventInfo["Location"],
+    Description: eventInfo["Description"],
+    Date: eventInfo["Date"],
+    UserList: eventInfo["UserList"]
+  });
+  
+  
+  //now update it to the events as well:
+  eventRef.set({
+    Name: eventInfo["Name"],
+    Location: eventInfo["Location"],
+    Description: eventInfo["Description"],
+    Date: eventInfo["Date"],
+    UserList: eventInfo["UserList"]
+  });
+    
+  });
+  
+  console.log("SUCCESS!");
 }
 
 function deleteEvent(element){
