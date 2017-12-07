@@ -14,13 +14,6 @@ router.get('/', function(req, res, next) {
 //   res.render('profile.jade', { title: 'Profile' });
 // });
 
-<<<<<<< HEAD
-=======
-router.get('/events', function(req, res, next) {
-  res.render('events.jade', { title: 'Events' });
-});
->>>>>>> master
-
 // router.get('/messages', function(req, res, next) {
 //   res.render('chat.jade', { title: 'Chat' });
 // });
