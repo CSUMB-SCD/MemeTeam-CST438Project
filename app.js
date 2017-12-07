@@ -150,6 +150,6 @@ getMovieDb();
 
 module.exports = app;
 
-http.listen(process.env.PORT, function() {
-  console.log(process.env.IP + ":" + process.env.PORT);
-});
+// http.listen(process.env.PORT, function() {
+//   console.log(process.env.IP + ":" + process.env.PORT);
+// });
