@@ -299,9 +299,6 @@ function addEvent(){
   var eventLocation = $("#location").val();
   var eventDescription = $("#description").val();
   var eventDate = $("#date").val();
-  
-  
-
     
   var userRef = db.ref().child('user').child(user.uid).child('events').child(newEventRef.key);
   userRef.set({
@@ -310,14 +307,14 @@ function addEvent(){
     Description: eventDescription,
     Date: eventDate
   })
-  
-  var userList = userRef;
+
+  var userId = db.ref().child('user').child(user.uid);
     newEventRef.set({
     Name: eventName,
     Location: eventLocation,
     Description: eventDescription,
     Date: eventDate,
-    UserList: userList
+    UserList: userId.key
   });
   
 }
