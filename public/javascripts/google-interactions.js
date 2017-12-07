@@ -328,8 +328,8 @@ function getAllEvents(){
     ref.once('value',function(snap) {
       $('#eventsList').empty();
         snap.forEach(function(item) {
-            $("#eventsList").append("<div class = 'event'><br><p>Name: " + item.val().Name + "<br>Description:" + 
-            item.val().Description + "<br>Location" + item.val().Location + "<br>Date" + item.val().Date);
+            $("#eventsList").append("<div class = 'event'><br><p>Name: " + item.val().Name + "<br>Description: " + 
+            item.val().Description + "<br>Location: " + item.val().Location + "<br>Date: " + item.val().Date);
             $("#eventsList").append("<br><button id = '" + item.val().eventId + "'onclick='joinEvent(id)'>Join Event</button>");
         })
       
