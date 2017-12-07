@@ -314,7 +314,8 @@ function addEvent(){
     Location: eventLocation,
     Description: eventDescription,
     Date: eventDate,
-    UserList: userId.key
+    UserList: userId.key,
+    EventID: newEventRef.key
   });
   
 }
@@ -327,8 +328,47 @@ function getAllEvents(){
         snap.forEach(function(item) {
             $("#eventsList").append("<div class = 'event'><br><p>Name: " + item.val().Name + "<br>Description:" + 
             item.val().Description + "<br>Location" + item.val().Location + "<br>Date" + item.val().Date);
-            $("#eventsList").append("<br><button id=joinEvent()>Join Event</button>");
+            $("#eventsList").append("<br><button id ='" + item.key + "' onclick='joinEvent(this.id)'>Join Event</button>");
         })
       
     })
+}
+
+function joinEvent(eventId){
+  var user = firebase.auth().currentUser;
+  var db = getFirebaseConn();
+  var eventRef = db.ref().child('events').child(eventId);
+  var userId = user.uid;
+  
+  
+  
+  //get event information:
+  var eventInfo = {};
+  eventInfo["UserList"] = new Array();
+
+  eventRef.once("value").then(function(snapshot){
+    eventInfo["Date"] = snapshot.val().Date;
+    eventInfo["Location"] = snapshot.val().Location;
+    eventInfo["Name"] = snapshot.val().Name;
+    eventInfo["UserList"].push(snapshot.val().UserList);
+    eventInfo["Description"] = snapshot.val().Description;
+    
+     //update it with the user joining event:
+    eventInfo["UserList"].push(user.uid);
+    
+      
+  //add it to user Events:
+  var userRef = db.ref().child('user').child(user.uid).child('events');
+  
+  userRef.set({
+    Name: eventInfo["Name"],
+    Location: eventInfo["Location"],
+    Description: eventInfo["Description"],
+    Date: eventInfo["Date"],
+    UserList: eventInfo["UserList"]
+  });
+  
+    
+  });
+
 }
