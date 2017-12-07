@@ -7018,3 +7018,19 @@ a.list-group-item-danger.active:focus {
 .popover-title {
   border: none;
 }
+
+.carousel-inner img {
+  margin: auto;
+  width: 100%;
+  height: inherit;
+
+}
+
+.carousel-caption{
+    top: 20%;
+}
+
+#carousel-856253{
+  height: 350px;
+  overflow: hidden;
+}

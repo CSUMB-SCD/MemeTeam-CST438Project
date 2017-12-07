@@ -1,0 +1,161 @@
+- var itr = 0;
+doctype html
+html(lang='en-us')
+  head
+    meta(charset='utf-8')
+    title WatchIt
+    // Bootstrap
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    nav.navbar.navbar-default(role='navigation')
+      .navbar-header
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='#') Brand
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li.active
+            a(href='#') Home
+          li
+            a(href='#') Messages
+          li
+            a(href='#') Profile
+        form.navbar-form.navbar-left(role='search')
+          .form-group
+            input.form-control(type='text')
+          button.btn.btn-default(type='submit')
+            | Submit
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='#') Link
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | Account
+              strong.caret
+            ul.dropdown-menu
+              li
+                a(href='#') Settings
+              li
+                a(href='#') Privacy
+              li.divider
+              li
+                a(href='#') Log Out
+    .container-fluid
+  .row
+    .col-md-12
+      #tabs-587037.tabbable
+        ul.nav.nav-tabs
+          li.active
+            a(href='#panel-675086', data-toggle='tab')
+              h4
+                | Dashboard
+          li
+            a(href='#panel-96135', data-toggle='tab')
+              h4
+                | My Events
+        .tab-content
+          #panel-675086.tab-pane.active
+            
+            #carousel-856253.carousel.slide
+              ol.carousel-indicators
+                li.active(data-slide-to='0', data-target='#carousel-856253')
+                li(data-slide-to='1', data-target='#carousel-856253')
+                li(data-slide-to='2', data-target='#carousel-856253')
+              .carousel-inner
+                .item
+                  .carousel-caption
+                    h4
+                      | #{database[0].title}
+                    p
+                      | #{database[0].overview}
+                  img(alt='Carousel Bootstrap First', src='https://image.tmdb.org/t/p/w500/#{database[0].backdrop}', style='width:100%;')
+                .item.active
+                  img(alt='Carousel Bootstrap Second', src='https://image.tmdb.org/t/p/w500/#{database[1].backdrop}')
+                  .carousel-caption
+                    h4
+                      | #{database[1].title}
+                    p
+                      | #{database[1].overview}
+                .item
+                  img(alt='Carousel Bootstrap Third', src='https://image.tmdb.org/t/p/w1000/#{database[2].backdrop}')
+                  .carousel-caption
+                    h4
+                      | #{database[2].title}
+                    p
+                      | #{database[2].overview}
+              a.left.carousel-control(href='#carousel-856253', data-slide='prev')
+                span.glyphicon.glyphicon-chevron-left
+              a.right.carousel-control(href='#carousel-856253', data-slide='next')
+                span.glyphicon.glyphicon-chevron-right
+          .row
+            each data in database
+              if(itr > 3)
+                .col-sm-6.col-md-4
+                  .thumbnail
+                    img(src='https://image.tmdb.org/t/p/w300/#{data.backdrop}', alt='...', style='height:200px;')
+                    .caption(style='padding:5px;')
+                    h4(style='color:black; font-weight: bold;')
+                      | #{data.title}
+                    p(style='height:100px; overflow: scroll;')
+                      | #{data.overview}
+                    p
+                      // a.btn.btn-primary(href='/events/'+ data.title, role='button') View Events & Info
+                      a.btn.btn-primary(href='/events/', role='button') View Events & Info
+              - itr++
+              // script.
+              //   //console.log(data)
+              //   var pic ='#{data.poster_path}'; 
+              //   //var title = <%- JSON.stringify(database[i].title) %>;
+              //   //var pic = <%- JSON.stringify(database[i].poster_path) %>;
+              //   var title ='#{data.title}';
+              //   var overview ='#{data.overview}';
+              //   //var overview = <%- JSON.stringify(database[i].overview) %>;
+              //   $("#popular").append(
+              //   $("<div>")
+              //   .attr("class", "col-sm-6 col-md-4")
+              //   .append(
+              //   $("<div>")
+              //   .attr("class", "thumbnail")
+              //   .append(
+              //   $("<img>")
+              //   .attr("src", "https://image.tmdb.org/t/p/w300/" + poster_path)
+              //   )
+              //   .append(
+              //   $("<div>")
+              //   .attr("class", "caption")
+              //   )
+              //   .append(
+              //   $("<h3>")
+              //   .html(title)
+              //   )
+              //   .append(
+              //   $("<p>")
+              //   .html(overview)
+              //   )
+              //   .append(
+              //   $("<p>")
+              //   .append(
+              //   $("<a>")
+              //   .attr("href", "#")
+              //   .attr("role", "button")
+              //   .attr("class", "btn btn-primary")
+              //   .html("View Events & Info")
+              //   )
+              //   )
+              //   )
+              //   );
+              
+
+
+          #panel-96135.tab-pane
+            p
+              | Hello
+    script(src='javascripts/jquery.min.js')
+    script(src='javascripts/bootstrap.min.js')
+    
+    
