@@ -1,23 +1,10 @@
 # MemeTeam-CST438Project
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+# WatchIt
 
 
-Welcome to your Node.js project on Cloud9 IDE!
+WatchIt is a Node.js app for scheduling viewing parties with your friends! This app utlizies Google Sign-In so users can get going quickly without having to create an account. The current version supports creating/joining events, friend lists, and messaging between friends.
 
-This chat example showcases how to use `socket.io` with a static `express` server.
+## User Requirements
+     Just a google account and your good to go!
 
-## Running the server
-
-1) Open `server.js` and start thgit e app by clicking on the "Run" button in the top menu.
-
-2) Alternatively you can launch the app from the Terminal:
-
-    $ node server.js
-
-Once the server is running, open the project in the shape of 'https://projectname-username.c9users.io/'. As you enter your name, watch the Users list (on the left) update. Once you press Enter or Send, the message is shared with all connected clients.

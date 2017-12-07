@@ -1,5 +1,4 @@
-var express = require('express');
-var router = express.Router();
+
 function userLogin() {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -49,6 +48,7 @@ function onSignIn(googleUser) {
   });
   
   
+  firebaseBuffer();
   updateUserOnFirebase(); 
   
   $("#logoutButton").show();
@@ -77,31 +77,340 @@ function signOut(){
     })
     $("#logoutButton").hide();
     $("#signOnButton").show();
+    window.location.href = "/"
 
 }
 
 
 function updateUserOnFirebase(){
+  
+  var maxTries = 5;
+  while(maxTries>0){
+    try{
+      var user = firebase.auth().currentUser;
+      var db = getFirebaseConn();
+      var email = user.email;
+      var userId = user.uid;
+      var photoURL = user.photoURL;
+      var name = user.displayName;
+      
+      
+      var currentdate = new Date(); 
+      var ampm = "";
+      if (currentdate.getHours()  > 12){
+        ampm = "PM";
+      }else{
+        ampm = "AM";
+      }
+      var datetime = (currentdate.getMonth()+1) + "/"
+                    + currentdate.getDate() + "/" 
+                    + currentdate.getFullYear() + " @ "  
+                    + (currentdate.getHours() % 12) + ":"  
+                    + currentdate.getMinutes() + ":" 
+                    + currentdate.getSeconds() + " " + ampm;
+    
+      
+      var dbUser = db.ref().child('user').child(userId)
+      dbUser.child('email').set(email);
+      dbUser.child('userId').set(userId);
+      dbUser.child('name').set(name);
+      dbUser.child('photoURL').set(photoURL);
+      dbUser.child('last-login').set(datetime);
+      return
+    }catch(e){
+      maxTries--;
+    }
+  }
+}
+  
+
+function getUserMessagesFromFirebase(){
+    var user = firebase.auth().currentUser;
+    
+    db = getFirebaseConn();
+
+    var ref = db.ref().child('user').child(user.uid).child('messages');
+    var messages = [];
+  
+    ref.once('value',function(snap) {
+        snap.forEach(function(item) {
+            $( "#tabs-2" ).append( "<p>" + item.val().time + ": "
+            + item.val().message  + " - " + item.val().from + "</p>" )
+        })
+     })
+    return;
+
+ 
+
+ 
+}
+
+function getFriendsFromFirebase(){
+    var user = firebase.auth().currentUser;
+    var db = getFirebaseConn();
+    
+    var ref = db.ref().child('user').child(user.uid).child('friends');
+    var friends = [];
+    
+    ref.once('value',function(snap) {
+        snap.forEach(function(item) {
+            $("#tabs-3").append("<div class = 'friend'><img class = 'profile-img' src = '" + item.val().profileURL + " '></img>" 
+            + "<p class = 'profile-friend'>" + item.val().displayName + " - " + item.val().email + "</p></div>" );
+            $("#receiverSelect").append("<option value = '" + item.val().userId +  "' >" + item.val().displayName + "</option>");
+        })
+      
+    })
+    
+
+    
+}
+
+
+function getAllOtherUsers(user){
+  var db = getFirebaseConn();
+  var ref = db.ref().child('user');
+  ref.once('value',function(snap) {
+        snap.forEach(function(item) {
+            console.log("CHECKING TRUTH" + (isFriend(item.val().userId)));
+            if(item.val().userId != user && !(isFriend(item.val().userId))){
+              $("#userModalBody").append("<div class = 'potentialFriend'><img class = 'potential-friend-img img-circle' src = '" 
+               + item.val().photoURL
+               + "'></img><button class = 'add-user' value = '" + item.val().userId + "' onclick = 'addFriend(this)'>+</button>" 
+               + "<p class = 'potentialFriendText'>" + item.val().name + " - " + item.val().email + "</p></div>");
+            }
+        })
+      
+    })
+  
+}
+
+function isFriend(userId){
+  var db = getFirebaseConn();
   var user = firebase.auth().currentUser;
-  db = getFirebaseConn();
-  var email = user.email;
-  var userId = user.uid;
-  var name = user.displayName;
+  
+  
+  //console.log("MATCHING" + userId);
+  var ref = db.ref().child('user').child(user.uid).child('friends'); 
+  ref.once('value',function(snap) {
+        snap.forEach(function(item) {
+          console.log(item.val());
+          
+            if(item.val().userId == userId){
+              
+              return true;
+            }
+            
+        })
+        return false;
+  })
+}
+
+function addFriendsFromFirebase(){
+    var user = firebase.auth().currentUser;
+   var potentialFriends = getAllOtherUsers(user.uid);
+}
+
+function addFriend(userToAdd){
+  var db = getFirebaseConn();
+  
+  var user = firebase.auth().currentUser;
+   
+  var ref = db.ref().child('user').child(userToAdd.getAttribute('value')); 
+  ref.on('value', function(snapshot) {
+    console.log(snapshot.val());
+    var newFriend = db.ref().child('user').child(user.uid).child('friends').child(userToAdd.getAttribute('value'));
+    newFriend.child('displayName').set(snapshot.val().name);
+    newFriend.child('email').set(snapshot.val().email);
+    newFriend.child('profileURL').set(snapshot.val().photoURL);
+    newFriend.child('userId').set(snapshot.val().userId);
+  
+  });
+  
+  var matchFriend = db.ref().child('user').child(userToAdd.getAttribute('value')).child('friends').child(user.uid)
+  matchFriend.child('displayName').set(user.displayName);
+  matchFriend.child('email').set(user.email);
+  matchFriend.child('profileURL').set(user.photoURL);
+  matchFriend.child('userId').set(user.uid);
+  
+   
+  var modal = document.getElementById('userModal');
+   modal.style.display = "none";
+  var modalBody = document.getElementById('userModalBody').innerHTML = '';
+  location.reload();
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function firebaseBuffer() {
+  await sleep(2000);
+}
+
+
+function sendMessageOverFirebase(){
+  var db = getFirebaseConn();
+  var user = firebase.auth().currentUser;
+  
+  
+  var userMessage = $("#messageBody").val();
+  var targetUser = $("#receiverSelect").val();
   
   
   var currentdate = new Date(); 
-  var datetime = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
+      var ampm = "";
+      if (currentdate.getHours()  > 12){
+        ampm = "PM";
+      }else{
+        ampm = "AM";
+      }
+      var datetime = (currentdate.getMonth()+1) + "/"
+                    + currentdate.getDate() + "/" 
+                    + currentdate.getFullYear() + " @ "  
+                    + (currentdate.getHours() % 12) + ":"  
+                    + currentdate.getMinutes() + ":" 
+                    + currentdate.getSeconds() + " " + ampm;
+    
+  
+  var ref = db.ref().child('user').child(targetUser).child('messages');
+  var newMessageRef = ref.push();
+  newMessageRef.set({
+    from: user.displayName,
+    email: user.email,
+    time : datetime,
+    message : userMessage 
+  });
+   
 
   
-  var dbUser = db.ref().child('user').child(userId)
-  dbUser.child('email').set(email);
-  dbUser.child('userId').set(userId);
-  dbUser.child('name').set(name);
-  dbUser.child('last-login').set(datetime);
+  
+  console.log("Sending : '" + userMessage + "' to " + targetUser);
+}
+
+function addEvent(){
+  var db = getFirebaseConn();
+    var user = firebase.auth().currentUser;
+
+  var ref = db.ref().child('events');
+  var newEventRef = ref.push();
+  
+  console.log("CHECKING EVENT REF KEY " + newEventRef.key)
+  var eventName = $("#name").val();
+  var eventLocation = $("#location").val();
+  var eventDescription = $("#description").val();
+  var eventDate = $("#date").val();
+  var userList = user.uid;
+  
+  newEventRef.set({
+    Name: eventName,
+    Location: eventLocation,
+    Description: eventDescription,
+    Date: eventDate,
+    UserList: userList,
+    eventId: newEventRef.key
+
+  });
+  
+  var userRef = db.ref().child('user').child(user.uid).child('events').child(newEventRef.key);
+  userRef.set({
+    Name: eventName,
+    Location: eventLocation,
+    Description: eventDescription,
+    Date: eventDate,
+    UserList: userList,
+    eventId: newEventRef.key
+    
+  })
+}
+function getAllEvents(){
+  var db = getFirebaseConn();
+  var ref = db.ref().child('events');
+    ref.once('value',function(snap) {
+      $('#eventsList').empty();
+        snap.forEach(function(item) {
+            $("#eventsList").append("<div class = 'event'><br><p>Name: " + item.val().Name + "<br>Description: " + 
+            item.val().Description + "<br>Location: " + item.val().Location + "<br>Date: " + item.val().Date);
+            $("#eventsList").append("<br><button id = '" + item.val().eventId + "'onclick='joinEvent(id)'>Join Event</button>");
+        })
+      
+    })
+}
+
+function getEventsFromFirebase(){
+  var db = getFirebaseConn();
+      var user = firebase.auth().currentUser;
+
+  var ref = db.ref().child('user').child(user.uid).child('events');
+  ref.once('value',function(snap) {
+        snap.forEach(function(item) {
+            $("#userEvents").append("<div class = 'event' ><button class = 'remove-user' value = '" + item.val().EventId + "' onclick = 'deleteEvent(this)'>-</button> <div>"+item.val().Name +"</div>"+
+             item.val().Date + " @ " 
+            + item.val().Location  +"</div>");
+        
+          
+          
+        })
+      
+    })
+}
+
+function joinEvent(eventId){
+  var db = getFirebaseConn();
+  var eventRef = db.ref().child('events').child(eventId);
+  console.log('Eventid ' + eventId);
+  console.log("EventREf:" + eventRef);
+  //get event information:
+  eventRef.once("value").then(function(snapshot){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    var eventInfo = {};
+    eventInfo["UserList"] = new Array();
+    eventInfo["Date"] = snapshot.val().Date;
+    eventInfo["Location"] = snapshot.val().Location;
+    eventInfo["Name"] = snapshot.val().Name;
+    eventInfo["UserList"].push(snapshot.val().UserList);
+    eventInfo["Description"] = snapshot.val().Description;
+    
+     //update it with the user joining event:
+    eventInfo["UserList"].push(user.uid);
+      
+  //add it to user Events:
+  var userRef = db.ref().child('user').child(user.uid).child('events').child(eventId);
+  
+  userRef.set({
+    Name: eventInfo["Name"],
+    Location: eventInfo["Location"],
+    Description: eventInfo["Description"],
+    Date: eventInfo["Date"],
+    UserList: eventInfo["UserList"],
+    EventId : eventId
+    
+  });
+  
+  
+  //now update it to the events as well:
+  eventRef.set({
+    Name: eventInfo["Name"],
+    Location: eventInfo["Location"],
+    Description: eventInfo["Description"],
+    Date: eventInfo["Date"],
+    UserList: eventInfo["UserList"],
+    EventId : eventId
+  });
+    
+  });
+  
+  window.location = "/profile";
+
+}
+
+function deleteEvent(element){
+  var db = getFirebaseConn();
+  
+  var user = firebase.auth().currentUser;
    
+  var ref = db.ref().child('user').child(user.uid).child('events').child(element.getAttribute('value')); 
+  ref.remove();
+  location.reload();
+
 }

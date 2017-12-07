@@ -4,8 +4,9 @@ html
     meta(charset='utf-8')
     title WatchIt
     // Bootstrap
-    link(href='/stylesheets/style.css', rel='stylesheet')
+    link(href='/stylesheets/main.css', rel='stylesheet')
   body
+   nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
     .container-fluid
       .row
         .col-md-12
@@ -20,11 +21,11 @@ html
             #bs-example-navbar-collapse-1.collapse.navbar-collapse
               ul.nav.navbar-nav
                 li.active
-                  a(href='#') Home
-                li
-                  a(href='/messages') Messages
+                  a(href='/') Home
                 li
                   a(href='/profile') Profile
+                li
+                  a(href='/event') Create Event
                 li
                   a(href='/eventdashboard') Events
                 
@@ -40,8 +41,6 @@ html
                    .g-signin2(data-onsuccess='onSignIn', data-theme="dark")
                   #logoutButton(style = "display:none")
                     button(onclick = 'signOut()') Logout
-                    
-
                   ul.dropdown-menu
                     li
                       a(href='#') Settings
@@ -54,113 +53,34 @@ html
             h1
               | WatchIt 
               small watch stuff with your pals!
-          .row
-            .col-md-10
-              #carousel-639292.carousel.slide
-                ol.carousel-indicators
-                  li.active(data-slide-to='0', data-target='#carousel-639292')
-                  li(data-slide-to='1', data-target='#carousel-639292')
-                  li(data-slide-to='2', data-target='#carousel-639292')
-                .carousel-inner
-                  .item.active
-                    img(alt='Carousel Bootstrap First', src='http://lorempixel.com/output/sports-q-c-1600-500-1.jpg')
-                    .carousel-caption
-                      h4
-                        | Game Showings
-                      p
-                        | Watch sport related things!
-                  .item
-                    img(alt='Carousel Bootstrap Second', src='http://lorempixel.com/output/sports-q-c-1600-500-2.jpg')
-                    .carousel-caption
-                      h4
-                        | Game of Thrones Viewing Parties
-                      p
-                        | Watch your favorite characters get killed off!
-                  .item
-                    img(alt='Carousel Bootstrap Third', src='http://lorempixel.com/output/sports-q-c-1600-500-3.jpg')
-                    .carousel-caption
-                      h4
-                        | Watch the Fight
-                      p
-                        | Watch people get beat up!
-                a.left.carousel-control(href='#carousel-639292', data-slide='prev')
-                  span.glyphicon.glyphicon-chevron-left
-                a.right.carousel-control(href='#carousel-639292', data-slide='next')
-                  span.glyphicon.glyphicon-chevron-right
-            .col-md-2
-              .list-group
-                a.list-group-item.active(href='#') Home
-                .list-group-item
-                  | Information
-                .list-group-item
-                  h4.list-group-item-heading
-                    | News
-                  p.list-group-item-text
-                    | It is WatchIt's first week online!
-                .list-group-item
-                  span.badge 1
-                  | Notifications
-                a.list-group-item.active
-                  span.badge 1
-                  | Account
-                a.list-group-item.active
-                  span.badge 3
-                  | Updates
-          .row
-            .col-md-4
-              blockquote
-                p
-                  | Sports
-              #panel-792217.panel-group
-                .panel.panel-default
-                  .panel-heading
-                    a.panel-title(data-toggle='collapse', data-parent='#panel-792217', href='#panel-element-899617') Show Viewings
-                  #panel-element-899617.panel-collapse.collapse.in
-                    .panel-body
-                      | Popular Viewings
-                .panel.panel-default
-                  .panel-heading
-                    a.panel-title(data-toggle='collapse', data-parent='#panel-792217', href='#panel-element-803115') Host Viewing
-                  #panel-element-803115.panel-collapse.collapse
-                    .panel-body
-                      | Create Event
-            .col-md-4
-              blockquote
-                p
-                  | Shows
-              #panel-53908.panel-group
-                .panel.panel-default
-                  .panel-heading
-                    a.panel-title(data-toggle='collapse', data-parent='#panel-53908', href='#panel-element-943073') Join Game Day!
-                  #panel-element-943073.panel-collapse.collapse.in
-                    .panel-body
-                      | Popular Viewings
-                .panel.panel-default
-                  .panel-heading
-                    a.panel-title(data-toggle='collapse', data-parent='#panel-53908', href='#panel-element-217509') Host Viewings!
-                  #panel-element-217509.panel-collapse.collapse
-                    .panel-body
-                      | Create viewing event
-            .col-md-4
-              blockquote
-                p
-                  | Other
-              #panel-833684.panel-group
-                .panel.panel-default
-                  .panel-heading
-                    a.panel-title(data-toggle='collapse', data-parent='#panel-833684', href='#panel-element-192515') Watch Season Showings
-                  #panel-element-192515.panel-collapse.collapse.in
-                    .panel-body
-                      | Create viewing event
-                .panel.panel-default
-                  .panel-heading
-                    a.panel-title(data-toggle='collapse', data-parent='#panel-833684', href='#panel-element-89457') Host Viewings
-                  #panel-element-89457.panel-collapse.collapse
-                    .panel-body
-                      | Popular Show Viewings
-          h3.text-info.text-right
-            | Sign up now!
+           header.py-5.bg-image-full(style="background-image: url('https://i.ytimg.com/vi/v1lM2XmIsqQ/maxresdefault.jpg');")
+      
+    section.py-5
+      .container
+        h1 What is WatchIt?
+        p.lead WatchIt is a website where you can connect with your friends and create an event to watch your favorite films!
+        p
+          | It's as easy as signing into your google account!
     
+    section.py-5.bg-image-full(style="background-image: url('https://i.ytimg.com/vi/v1lM2XmIsqQ/maxresdefault.jpg');")
+     
+      div(style='height: 200px;')
+   
+    section.py-5
+      .container
+        h1 Who are the minds behind WatchIt?
+        p.lead WatchIt was created by the hard work and dedication of Sean McCarthy (Chief Software Architect), Laura McRae (Chief System Engineer), Adrian Martinez (QA Manager), and Christian Martinez (Project Manager).
+        p
+          | Contact us! Tel:  (831) 883-4040, Email: WatchIt01@gmail.com
+    
+    footer.py-5.bg-dark
+      .container
+    script(src='vendor/jquery/jquery.min.js')
+    script(src='vendor/bootstrap/js/bootstrap.bundle.min.js')
+          
+            
+            
+         
     //Firebase login
     script(src='https://www.gstatic.com/firebasejs/4.7.0/firebase.js')
     script(src='https://apis.google.com/js/platform.js', async='', defer='')
@@ -171,7 +91,7 @@ html
       // Initialize Firebase
       var config = {
       apiKey: "AIzaSyAKIee16H8oZU4UlTbg75ArzcvocO1JscE",
-      authDomain: "cst438-finalproject-smccarthy0426.c9users.io",
+      authDomain: "watchit-csumb.herokuapp.com",
       databaseURL: "https://watchit-61266.firebaseio.com",
       projectId: "watchit-61266",
       storageBucket: "watchit-61266.appspot.com",
@@ -180,8 +100,7 @@ html
       firebase.initializeApp(config);
     script(src='/javascripts/firebase-conn.js')
     script(src='/javascripts/google-interactions.js')
-    
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-
+    script(type='text/javascript', src='https://addevent.com/libs/atc/1.6.1/atc.min.js', async='', defer='')
 
 

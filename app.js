@@ -1,18 +1,18 @@
 var express = require('express');
-var session = require('express-session')
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var app = express();
 var http = require("http").Server(app)
-
 
 var index = require('./routes/index');
 var profile = require('./routes/profile');
 var users = require('./routes/users');
 var chat = require('./routes/chat');
+var event = require('./routes/event');
 var events = require('./routes/events');
 var eventdashboard = require('./routes/eventdashboard');
 
@@ -37,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/event', event);
 app.use('/messages', chat);
 app.use('/profile', profile);
 app.use('/events', events);
@@ -59,14 +60,6 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
-app.use(session({ secret: 'this-is-a-secret-token', cookie: { maxAge: 60000 } }));
-app.get('/', function(req, res, next) {
-    req.session.someAttribute = "foo";
-});
-
-
-
 
 
 const API_KEY = '76390e37292e31aa4b2f0f32cb375f2c';
@@ -156,6 +149,7 @@ function getMovieDb() {
 }
 getMovieDb();
 
+
 // function defer(method) {
 //     if (window.jQuery) {
 //         method();
@@ -168,6 +162,7 @@ getMovieDb();
 //     app.locals.movie_db = database;
 // }
 // defer(setAppLocals);
+
 
 module.exports = app;
 
