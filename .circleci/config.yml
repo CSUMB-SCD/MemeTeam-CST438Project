@@ -23,4 +23,4 @@ jobs:
           command: './node_modules/.bin/mocha'
      branches:
       only:
-        - unit_tests
+        - master
