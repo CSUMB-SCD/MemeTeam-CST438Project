@@ -1,3 +1,9 @@
+
+//Collection of functions for user profile interactions
+
+
+
+//initializes user profile information. Includes messages, friends, events
 function loadUserProfile(){
     var user = firebase.auth().currentUser;
     
@@ -77,7 +83,6 @@ function closeUserModal(){
 function launchMessagingModal(){
     var modal = document.getElementById('messageModal');
     modal.style.display = "block";
-    //addFriendsFromFirebase();
 }
 
 function closeMessageModal(){
@@ -93,7 +98,6 @@ function closeMessageModal(){
 function launchEventModal(){
     var modal = document.getElementById('eventModal');
     modal.style.display = "block";
-    //addFriendsFromFirebase();
 }
 
 function closeEventModal(){

@@ -21,6 +21,8 @@ function userLogin() {
     });
 }
 
+
+
 function onSignIn(googleUser) {
     console.log('Google Auth Response', googleUser);
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
@@ -55,6 +57,9 @@ function onSignIn(googleUser) {
   $("#signOnButton").hide();
 }
 
+
+
+//asserts if user is already logged in via firebase
 function isUserEqual(googleUser, firebaseUser) {
   if (firebaseUser) {
     var providerData = firebaseUser.providerData;
@@ -69,12 +74,15 @@ function isUserEqual(googleUser, firebaseUser) {
   return false;
 }
 
+
 function signOut(){
   
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
       console.log('User signed out.');
     })
+    
+    //toggle logout button, return home
     $("#logoutButton").hide();
     $("#signOnButton").show();
     window.location.href = "/"
@@ -82,6 +90,8 @@ function signOut(){
 }
 
 
+//timestamps user in firebase
+//if the user is logged in for the first time, we register their information here
 function updateUserOnFirebase(){
   
   var maxTries = 5;
@@ -165,7 +175,7 @@ function getFriendsFromFirebase(){
     
 }
 
-
+//get list of users for potential friends
 function getAllOtherUsers(user){
   var db = getFirebaseConn();
   var ref = db.ref().child('user');
@@ -189,12 +199,10 @@ function isFriend(userId){
   var user = firebase.auth().currentUser;
   
   
-  //console.log("MATCHING" + userId);
   var ref = db.ref().child('user').child(user.uid).child('friends'); 
   ref.once('value',function(snap) {
         snap.forEach(function(item) {
-          console.log(item.val());
-          
+
             if(item.val().userId == userId){
               
               return true;
@@ -217,7 +225,6 @@ function addFriend(userToAdd){
    
   var ref = db.ref().child('user').child(userToAdd.getAttribute('value')); 
   ref.on('value', function(snapshot) {
-    console.log(snapshot.val());
     var newFriend = db.ref().child('user').child(user.uid).child('friends').child(userToAdd.getAttribute('value'));
     newFriend.child('displayName').set(snapshot.val().name);
     newFriend.child('email').set(snapshot.val().email);
@@ -284,7 +291,6 @@ function sendMessageOverFirebase(){
 
   
   
-  console.log("Sending : '" + userMessage + "' to " + targetUser);
 }
 
 function addEvent(){
@@ -294,7 +300,6 @@ function addEvent(){
   var ref = db.ref().child('events');
   var newEventRef = ref.push();
   
-  console.log("CHECKING EVENT REF KEY " + newEventRef.key)
   var eventName = $("#name").val();
   var eventLocation = $("#location").val();
   var eventDescription = $("#description").val();
@@ -361,8 +366,7 @@ function getEventsFromFirebase(){
 function joinEvent(eventId){
   var db = getFirebaseConn();
   var eventRef = db.ref().child('events').child(eventId);
-  console.log('Eventid ' + eventId);
-  console.log("EventREf:" + eventRef);
+
   //get event information:
   eventRef.once("value").then(function(snapshot){
     var user = firebase.auth().currentUser;
@@ -414,7 +418,6 @@ function deleteEvent(element){
   var user = firebase.auth().currentUser;
    
   var ref = db.ref().child('user').child(user.uid).child('events').child(element.getAttribute('value')); 
-  console.log("HERE" + element.getAttribute('value'));
   ref.remove();
   location.reload();
 
