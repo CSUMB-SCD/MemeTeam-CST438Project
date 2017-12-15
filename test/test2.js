@@ -1,6 +1,6 @@
 var expect = require("chai").expect; 
 //var sinon = require("sinon");
-var api = require("../app");
+//var api = require("../app");
 
 const API_KEY = '76390e37292e31aa4b2f0f32cb375f2c';
 var database = [];
