@@ -2,7 +2,7 @@ var expect = require("chai").expect;
 var chai = require('chai');
 //test info:
 var sinon = require("sinon");
-var api = require("../app");
+//var api = require("../app");
 
 var request = require('request');
 
